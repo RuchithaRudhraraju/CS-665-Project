@@ -97,6 +97,40 @@ def on_click_button7():
 		output += "\n"
 	textbox.setPlainText(output)
 	
+def on_click_button8():
+	dbcursor = db_connector.cursor()
+	query = "insert into Patient (Pid, patName, DOB, gender, address) values (%s, %s, %s, %s, %s)"
+	values_sql = (6, 'John Cena', '1998-06-15', 'M', '1845 Fairmount St')
+	dbcursor.execute(query, values_sql)
+	db_connector.commit()
+
+	dbcursor = db_connector.cursor()
+	dbcursor.execute("select * from Patient")
+	myoutput = dbcursor.fetchall()
+	output = "Pid\tpatName\tDOB\tgender\taddress\n"
+	for i in myoutput:
+		for j in i:
+			output += str(j) + "\t"
+		output += "\n"
+	textbox.setPlainText(output)
+
+def on_click_button9():
+	dbcursor = db_connector.cursor()
+	query = "insert into Doctor (Eid, DocName, specialization, hospitalId) values (%s, %s, %s, %s)"
+	values_sql = (6, 'Sarah Rachel', 'Dermatology', 5)
+	dbcursor.execute(query, values_sql)
+	db_connector.commit()
+
+	dbcursor = db_connector.cursor()
+	dbcursor.execute("select * from Doctor")
+	myoutput = dbcursor.fetchall()
+	output = "Eid\tDocName\tspecialization\thospitalId\n"
+	for i in myoutput:
+		for j in i:
+			output += str(j) + "\t"
+		output += "\n"
+	textbox.setPlainText(output)
+	
 label1 = QLabel(widget)
 label1.setText('Create new Laboratory Table')
 label1.move(20, 20)
@@ -167,6 +201,28 @@ button7.setText('Click')
 button7.move(190, 195)
 button7.show()
 
+label8 = QLabel(widget)
+label8.setText('Insert 1 row in Patient table')
+label8.setWordWrap(True)
+label8.move(20, 231)
+label8.show()
+
+button8 = QPushButton(widget)
+button8.setText('Click')
+button8.move(190, 228)
+button8.show()
+
+label9 = QLabel(widget)
+label9.setText('Insert 1 row in Doctor Table')
+label9.setWordWrap(True)
+label9.move(20, 265)
+label9.show()
+
+button9 = QPushButton(widget)
+button9.setText('Click')
+button9.move(190, 262)
+button9.show()
+
 button1.clicked.connect(on_click_button1)
 button2.clicked.connect(on_click_button2)
 button3.clicked.connect(on_click_button3)
@@ -174,6 +230,8 @@ button4.clicked.connect(on_click_button4)
 button5.clicked.connect(on_click_button5)
 button6.clicked.connect(on_click_button6)
 button7.clicked.connect(on_click_button7)
+button8.clicked.connect(on_click_button8)
+button9.clicked.connect(on_click_button9)
 
 widget.show()
 
