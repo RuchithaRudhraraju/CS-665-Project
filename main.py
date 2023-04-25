@@ -131,6 +131,36 @@ def on_click_button9():
 		output += "\n"
 	textbox.setPlainText(output)
 	
+def on_click_button10():
+	dbcursor = db_connector.cursor()
+	query = "UPDATE Hospital SET Hlocation = 'Rio Robles East CA' WHERE Hid=5"
+	dbcursor.execute(query)
+	db_connector.commit()
+	dbcursor = db_connector.cursor()
+	dbcursor.execute("select * from Hospital")
+	myoutput = dbcursor.fetchall()
+	output = "Hid\tHname\tHlocation\tHtype\n"
+	for i in myoutput:
+		for j in i:
+			output += str(j) + "\t"
+		output += "\n"
+	textbox.setPlainText(output)
+
+def on_click_button11():
+	dbcursor = db_connector.cursor()
+	query = "UPDATE Doctor SET DocName ='Shane Watson' WHERE Eid= 2"
+	dbcursor.execute(query)
+	db_connector.commit()
+	dbcursor = db_connector.cursor()
+	dbcursor.execute("select * from Doctor")
+	myoutput = dbcursor.fetchall()
+	output = "Eid\tDocName\tspecialization\thospitalId\n"
+	for i in myoutput:
+		for j in i:
+			output += str(j) + "\t"
+		output += "\n"
+	textbox.setPlainText(output)
+	
 label1 = QLabel(widget)
 label1.setText('Create new Laboratory Table')
 label1.move(20, 20)
@@ -223,6 +253,28 @@ button9.setText('Click')
 button9.move(190, 262)
 button9.show()
 
+label10 = QLabel(widget)
+label10.setText('Update 1 row in Hospital Table')
+label10.setWordWrap(True)
+label10.move(20, 297)
+label10.show()
+
+button10 = QPushButton(widget)
+button10.setText('Click')
+button10.move(190, 294)
+button10.show()
+
+label11 = QLabel(widget)
+label11.setText('Update 1 row in Doctor Table')
+label11.setWordWrap(True)
+label11.move(20, 330)
+label11.show()
+
+button11 = QPushButton(widget)
+button11.setText('Click')
+button11.move(190, 327)
+button11.show()
+
 button1.clicked.connect(on_click_button1)
 button2.clicked.connect(on_click_button2)
 button3.clicked.connect(on_click_button3)
@@ -232,6 +284,8 @@ button6.clicked.connect(on_click_button6)
 button7.clicked.connect(on_click_button7)
 button8.clicked.connect(on_click_button8)
 button9.clicked.connect(on_click_button9)
+button10.clicked.connect(on_click_button10)
+button11.clicked.connect(on_click_button11)
 
 widget.show()
 
