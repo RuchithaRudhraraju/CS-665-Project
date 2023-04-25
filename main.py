@@ -86,6 +86,17 @@ def on_click_button6():
 		output += "\n"
 	textbox.setPlainText(output)
 	
+def on_click_button7():
+	dbcursor = db_connector.cursor()
+	dbcursor.execute("SELECT Eid FROM Doctor JOIN Hospital ON Doctor.hospitalId = Hospital.Hid WHERE Hospital.Hname = 'Ku Hospital'")
+	myoutput = dbcursor.fetchall()
+	output = "Eid\n"
+	for i in myoutput:
+		for j in i:
+			output += str(j) + "\t"
+		output += "\n"
+	textbox.setPlainText(output)
+	
 label1 = QLabel(widget)
 label1.setText('Create new Laboratory Table')
 label1.move(20, 20)
@@ -146,12 +157,23 @@ button6.setText('Click')
 button6.move(190, 162)
 button6.show()
 
+label7 = QLabel(widget)
+label7.setText('Select using JOINS')
+label7.move(20, 198)
+label7.show()
+
+button7 = QPushButton(widget)
+button7.setText('Click')
+button7.move(190, 195)
+button7.show()
+
 button1.clicked.connect(on_click_button1)
 button2.clicked.connect(on_click_button2)
 button3.clicked.connect(on_click_button3)
 button4.clicked.connect(on_click_button4)
 button5.clicked.connect(on_click_button5)
 button6.clicked.connect(on_click_button6)
+button7.clicked.connect(on_click_button7)
 
 widget.show()
 
