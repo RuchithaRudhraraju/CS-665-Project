@@ -161,6 +161,36 @@ def on_click_button11():
 		output += "\n"
 	textbox.setPlainText(output)
 	
+def on_click_button12():
+	dbcursor = db_connector.cursor()
+	query = "DELETE FROM Disease WHERE Did = 4"
+	dbcursor.execute(query)
+	db_connector.commit()
+	dbcursor = db_connector.cursor()
+	dbcursor.execute("select * from Disease")
+	myoutput = dbcursor.fetchall()
+	output = "Did\tDname\n"
+	for i in myoutput:
+		for j in i:
+			output += str(j) + "\t"
+		output += "\n"
+	textbox.setPlainText(output)
+
+def on_click_button13():
+	dbcursor = db_connector.cursor()
+	query = "DELETE FROM Hospital WHERE Hname = 'Apollo'"
+	dbcursor.execute(query)
+	db_connector.commit()
+	dbcursor = db_connector.cursor()
+	dbcursor.execute("select * from Hospital")
+	myoutput = dbcursor.fetchall()
+	output = "Hid\tHname\tHlocation\tHtype\n"
+	for i in myoutput:
+		for j in i:
+			output += str(j) + "\t"
+		output += "\n"
+	textbox.setPlainText(output)
+	
 label1 = QLabel(widget)
 label1.setText('Create new Laboratory Table')
 label1.move(20, 20)
@@ -275,6 +305,29 @@ button11.setText('Click')
 button11.move(190, 327)
 button11.show()
 
+label12 = QLabel(widget)
+label12.setText('Delete 1 row from Disease Table')
+label12.setWordWrap(True)
+label12.move(20, 363)
+label12.show()
+
+button12 = QPushButton(widget)
+button12.setText('Click')
+button12.move(190, 360)
+button12.show()
+
+label13 = QLabel(widget)
+label13.setText('Delete 1 row from Hospital Table')
+label13.setWordWrap(True)
+label13.move(20, 395)
+label13.resize(100, 35)
+label13.show()
+
+button13 = QPushButton(widget)
+button13.setText('Click')
+button13.move(190, 392)
+button13.show()
+
 button1.clicked.connect(on_click_button1)
 button2.clicked.connect(on_click_button2)
 button3.clicked.connect(on_click_button3)
@@ -286,6 +339,8 @@ button8.clicked.connect(on_click_button8)
 button9.clicked.connect(on_click_button9)
 button10.clicked.connect(on_click_button10)
 button11.clicked.connect(on_click_button11)
+button12.clicked.connect(on_click_button12)
+button13.clicked.connect(on_click_button13)
 
 widget.show()
 
